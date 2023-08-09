@@ -1,0 +1,14 @@
+C:\MNR\Working\July\6th\Sample1\SampleData\bin\Debug\net6.0\SampleData.deps.json
+C:\MNR\Working\July\6th\Sample1\SampleData\bin\Debug\net6.0\SampleData.runtimeconfig.json
+C:\MNR\Working\July\6th\Sample1\SampleData\bin\Debug\net6.0\SampleData.dll
+C:\MNR\Working\July\6th\Sample1\SampleData\bin\Debug\net6.0\SampleData.pdb
+C:\MNR\Working\July\6th\Sample1\SampleData\obj\Debug\net6.0\SampleData.csproj.AssemblyReference.cache
+C:\MNR\Working\July\6th\Sample1\SampleData\obj\Debug\net6.0\SampleData.GeneratedMSBuildEditorConfig.editorconfig
+C:\MNR\Working\July\6th\Sample1\SampleData\obj\Debug\net6.0\SampleData.AssemblyInfoInputs.cache
+C:\MNR\Working\July\6th\Sample1\SampleData\obj\Debug\net6.0\SampleData.AssemblyInfo.cs
+C:\MNR\Working\July\6th\Sample1\SampleData\obj\Debug\net6.0\SampleData.csproj.CoreCompileInputs.cache
+C:\MNR\Working\July\6th\Sample1\SampleData\obj\Debug\net6.0\SampleData.dll
+C:\MNR\Working\July\6th\Sample1\SampleData\obj\Debug\net6.0\refint\SampleData.dll
+C:\MNR\Working\July\6th\Sample1\SampleData\obj\Debug\net6.0\SampleData.pdb
+C:\MNR\Working\July\6th\Sample1\SampleData\obj\Debug\net6.0\SampleData.genruntimeconfig.cache
+C:\MNR\Working\July\6th\Sample1\SampleData\obj\Debug\net6.0\ref\SampleData.dll

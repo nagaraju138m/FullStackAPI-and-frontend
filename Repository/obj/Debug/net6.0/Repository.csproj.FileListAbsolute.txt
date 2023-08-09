@@ -1,0 +1,17 @@
+C:\MNR\Working\July\6th\Sample1\Repository\bin\Debug\net6.0\Repository.deps.json
+C:\MNR\Working\July\6th\Sample1\Repository\bin\Debug\net6.0\Repository.runtimeconfig.json
+C:\MNR\Working\July\6th\Sample1\Repository\bin\Debug\net6.0\Repository.dll
+C:\MNR\Working\July\6th\Sample1\Repository\bin\Debug\net6.0\Repository.pdb
+C:\MNR\Working\July\6th\Sample1\Repository\bin\Debug\net6.0\SampleData.dll
+C:\MNR\Working\July\6th\Sample1\Repository\bin\Debug\net6.0\SampleData.pdb
+C:\MNR\Working\July\6th\Sample1\Repository\obj\Debug\net6.0\Repository.csproj.AssemblyReference.cache
+C:\MNR\Working\July\6th\Sample1\Repository\obj\Debug\net6.0\Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\MNR\Working\July\6th\Sample1\Repository\obj\Debug\net6.0\Repository.AssemblyInfoInputs.cache
+C:\MNR\Working\July\6th\Sample1\Repository\obj\Debug\net6.0\Repository.AssemblyInfo.cs
+C:\MNR\Working\July\6th\Sample1\Repository\obj\Debug\net6.0\Repository.csproj.CoreCompileInputs.cache
+C:\MNR\Working\July\6th\Sample1\Repository\obj\Debug\net6.0\Repository.csproj.CopyComplete
+C:\MNR\Working\July\6th\Sample1\Repository\obj\Debug\net6.0\Repository.dll
+C:\MNR\Working\July\6th\Sample1\Repository\obj\Debug\net6.0\refint\Repository.dll
+C:\MNR\Working\July\6th\Sample1\Repository\obj\Debug\net6.0\Repository.pdb
+C:\MNR\Working\July\6th\Sample1\Repository\obj\Debug\net6.0\Repository.genruntimeconfig.cache
+C:\MNR\Working\July\6th\Sample1\Repository\obj\Debug\net6.0\ref\Repository.dll
