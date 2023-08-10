@@ -21,6 +21,45 @@ namespace SampleData.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("SampleData.Data.Group", b =>
+                {
+                    b.Property<int>("GroupId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GroupId"), 1L, 1);
+
+                    b.Property<string>("GroupName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GroupId");
+
+                    b.ToTable("groups");
+                });
+
+            modelBuilder.Entity("SampleData.Data.GroupSubject", b =>
+                {
+                    b.Property<int>("GroupId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GroupId"), 1L, 1);
+
+                    b.Property<int>("GroupId1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GroupId");
+
+                    b.HasIndex("GroupId1");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("groupsSubject");
+                });
+
             modelBuilder.Entity("SampleData.Data.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -32,6 +71,9 @@ namespace SampleData.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Mobile")
                         .HasColumnType("int");
 
@@ -40,7 +82,65 @@ namespace SampleData.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GroupId");
+
                     b.ToTable("student");
+                });
+
+            modelBuilder.Entity("SampleData.Data.Subject", b =>
+                {
+                    b.Property<int>("SubjectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubjectId"), 1L, 1);
+
+                    b.Property<string>("SubjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SubjectId");
+
+                    b.ToTable("subjects");
+                });
+
+            modelBuilder.Entity("SampleData.Data.GroupSubject", b =>
+                {
+                    b.HasOne("SampleData.Data.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SampleData.Data.Subject", "Subject")
+                        .WithMany("GroupSubjects")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("SampleData.Data.Student", b =>
+                {
+                    b.HasOne("SampleData.Data.Group", "Group")
+                        .WithMany("students")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("SampleData.Data.Group", b =>
+                {
+                    b.Navigation("students");
+                });
+
+            modelBuilder.Entity("SampleData.Data.Subject", b =>
+                {
+                    b.Navigation("GroupSubjects");
                 });
 #pragma warning restore 612, 618
         }

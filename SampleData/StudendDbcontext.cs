@@ -16,6 +16,17 @@ namespace SampleData
         }
 
         public DbSet<Student> student { get; set; }
+        public DbSet<Group> groups { get; set; }
+        public DbSet<Subject> subjects { get; set; }
+        public DbSet<GroupSubject> groupsSubject { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.Group)
+                .WithMany(g => g.students)
+                .HasForeignKey(s => s.GroupId);
+        }
     }
     
 }

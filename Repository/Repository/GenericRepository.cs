@@ -65,10 +65,24 @@ namespace Repository.Repository
             throw new NotImplementedException();
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task UpdateAsync(int? id, T entity)
         {
-            context.Update(entity);
+            var result = await context.Set<T>().FindAsync(id);
+            if (result == null)
+            {
+                throw new DirectoryNotFoundException();
+            }
+
+            if (entity != null)
+            {
+                context.Entry(result).CurrentValues.SetValues(entity);
+                context.Entry(result).State = EntityState.Modified;
+            }
+
             await context.SaveChangesAsync();
         }
+
+
     }
 }
+

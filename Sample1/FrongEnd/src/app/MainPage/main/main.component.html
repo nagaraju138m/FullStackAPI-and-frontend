@@ -1,0 +1,23 @@
+<p-table [value]="students">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Student Id</th>
+        <th>Name</th>
+        <th>City</th>
+        <th>Mobile</th>
+        <th>Group</th>
+        <!-- Add more columns as needed -->
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-student>
+      <tr>
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.city }}</td>
+        <td>{{ student.mobile }}</td>
+        <td>{{ student.groupId }}</td>
+        <!-- Add more columns as needed -->
+      </tr>
+    </ng-template>
+  </p-table>
+  

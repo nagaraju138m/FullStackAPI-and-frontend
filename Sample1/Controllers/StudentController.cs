@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Interfaces;
+using SampleData.CustomModals;
 using SampleData.Data;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,19 +14,22 @@ namespace Sample1.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudnetRepository studnetRepository;
+        private readonly IMapper mapper;
 
-        public StudentController(IStudnetRepository studnetRepository)
+        public StudentController(IStudnetRepository studnetRepository, IMapper mapper)
         {
             this.studnetRepository = studnetRepository;
+            this.mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("GetStudents")]
         public async Task<ActionResult<IEnumerable>> GetStudents()
         {
             var students = await studnetRepository.GetAllAsync();
-            return Ok(students);
+            var studentDto = mapper.Map<List<GetStudentsDto>>(students);
+            return Ok(studentDto);
         }
-        [HttpPost]
+        [HttpPost("PostStudent")]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
             if (student == null)
@@ -38,14 +43,9 @@ namespace Sample1.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateStudent(int id,Student student)
         {
-            var stu = studnetRepository.GetAsync(id);
-            if (stu == null)
-            {
-                return NotFound();
-            }
             try
             {
-                await studnetRepository.UpdateAsync(student);
+                await studnetRepository.UpdateAsync(id,student);
             }
             catch (Exception ex) { }
 
