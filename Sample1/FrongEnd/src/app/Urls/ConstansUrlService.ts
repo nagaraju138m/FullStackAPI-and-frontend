@@ -1,8 +1,10 @@
-export class allUrls{
-    
-    public apiUrl = 'https://localhost:7083';
+import { Injectable } from "@angular/core"
 
-    getStudents = "/api/Student/"
-    postStudent = "/api/Student/GetStudents"
-    updateStudent = "/api/Student/UpdateStudents"
+
+export namespace ConstansUrlService{
+
+    
+    export const createStudents = "/api/Student/PostStudent"
+    export const getStudents = "/api/Student/GetStudents"
+    export const updateStudent = "/api/Student/UpdateStudents"
 }

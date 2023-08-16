@@ -1,0 +1,33 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" action="">
+    <div class="form-container">
+  
+      <div class="card">
+        <label for="Name">Name:</label>
+        <input pInputText type="text" id="Name" formControlName="Name" />
+      </div>
+    
+      <div class="card">
+        <label for="City">City:</label>
+        <input pInputText type="text" id="City" formControlName="City" />
+      </div>
+  
+      <div class="card">
+        <label for="Mobile">Mobile:</label>
+        <input pInputText type="email" id="Mobile" formControlName="Mobile" />
+      </div>
+    
+      <div class="card">
+        <label for="GroupId">GroupId:</label>
+        <input pInputText type="email" id="GroupId" formControlName="GroupId" />
+      </div>
+  
+      <p-button type="submit" [disabled]="registrationForm.invalid" label="Submit"></p-button>
+
+    </div>
+  </form>
+
+  <div class="card flex justify-content-center gap-2">
+    <p-toast></p-toast>
+</div>
+
+  

@@ -1,4 +1,43 @@
-<p-table [value]="students">
+
+<div>
+    <nav class="">
+        <div class="navbar-container container">
+            <input type="checkbox" name="" id="">
+            <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+            </div>
+            <ul class="menu-items">
+                <li>Home</li>
+                <li>Home</li>
+                <li><a (click)="registr()">Register</a></li>
+            </ul>
+            <h1 class="logo">Navbar</h1>
+        </div>
+    </nav>
+
+    <!-- <div>
+        <button>like</button>
+        <button>like</button>
+        <button>like</button>
+        <button>like</button>
+    </div> -->
+
+</div>
+
+
+
+<div>
+    <p-table [value]="students" 
+    
+    [paginator]="true" 
+    [rows]="5" 
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+    [rowsPerPageOptions]="[5,10, 25, 50]" [style]="{'margin-top':'5%'}">
+
     <ng-template pTemplate="header">
       <tr>
         <th>Student Id</th>
@@ -6,7 +45,7 @@
         <th>City</th>
         <th>Mobile</th>
         <th>Group</th>
-        <!-- Add more columns as needed -->
+        <th>Options</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-student>
@@ -16,8 +55,19 @@
         <td>{{ student.city }}</td>
         <td>{{ student.mobile }}</td>
         <td>{{ student.groupId }}</td>
-        <!-- Add more columns as needed -->
+        <td>
+            <i class="pi pi-ellipsis-v" (click)="menu.toggle($event)"></i>
+            <p-tieredMenu #menu [model]="items" [popup]="true" class="custom-tiered-menu"></p-tieredMenu>
+        </td>
       </tr>
     </ng-template>
-  </p-table>
+    <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+     </p-table>
+</div>
+    
   

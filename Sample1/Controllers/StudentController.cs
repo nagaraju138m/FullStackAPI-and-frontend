@@ -29,6 +29,7 @@ namespace Sample1.Controllers
             var studentDto = mapper.Map<List<GetStudentsDto>>(students);
             return Ok(studentDto);
         }
+        
         [HttpPost("PostStudent")]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
@@ -40,6 +41,7 @@ namespace Sample1.Controllers
             return Ok(students);
         }
 
+        
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateStudent(int id,Student student)
         {
@@ -51,6 +53,7 @@ namespace Sample1.Controllers
 
             return Ok(student);
         }
+
 
     }
 }

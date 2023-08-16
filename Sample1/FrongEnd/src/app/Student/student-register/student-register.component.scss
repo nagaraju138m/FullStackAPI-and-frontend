@@ -1,0 +1,21 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px; /* Add spacing between cards */
+  }
+  
+  label {
+    margin-bottom: 5px;
+  }
+  
+  button {
+    margin-top: 10px; /* Add spacing between the form and the button */
+  }
+  

@@ -7,20 +7,42 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MainComponent } from './MainPage/main/main.component';
 import { TableModule } from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http'
+import { ButtonModule } from 'primeng/button';
+import { StudentRegisterComponent } from './Student/student-register/student-register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { CardModule } from 'primeng/card';
+import CommonApiService from './Urls/CommonApiServices';
+import { ToastModule } from 'primeng/toast';
+import { ToasterService } from './Services/toaster.service';
+import { MessageService} from 'primeng/api';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    StudentRegisterComponent
   ],
   imports: [
+    ToastModule,
+    CardModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    ButtonModule,
     HttpClientModule,
     TableModule,
     BrowserAnimationsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TieredMenuModule,
   ],
-  providers: [],
+  providers: [
+    // provide: CommonApiService,
+    // useClass: CommonApiService
+    ToasterService,
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
