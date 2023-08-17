@@ -1,3 +1,4 @@
+<div class="overlay" *ngIf="editStudent"></div>
 
 <div>
     <nav class="">
@@ -10,64 +11,111 @@
             </div>
             <ul class="menu-items">
                 <li>Home</li>
-                <li>Home</li>
+                <li>About</li>
                 <li><a (click)="registr()">Register</a></li>
             </ul>
             <h1 class="logo">Navbar</h1>
         </div>
     </nav>
 
-    <!-- <div>
-        <button>like</button>
-        <button>like</button>
-        <button>like</button>
-        <button>like</button>
-    </div> -->
-
 </div>
 
 
 
 <div>
-    <p-table [value]="students" 
-    
-    [paginator]="true" 
-    [rows]="5" 
-    [showCurrentPageReport]="true"
-    [tableStyle]="{ 'min-width': '50rem' }"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
-    [rowsPerPageOptions]="[5,10, 25, 50]" [style]="{'margin-top':'5%'}">
+    <p-table [value]="students" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[5,10, 25, 50]" [style]="{'margin-top':'5%'}">
 
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Student Id</th>
-        <th>Name</th>
-        <th>City</th>
-        <th>Mobile</th>
-        <th>Group</th>
-        <th>Options</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-student>
-      <tr>
-        <td>{{ student.id }}</td>
-        <td>{{ student.name }}</td>
-        <td>{{ student.city }}</td>
-        <td>{{ student.mobile }}</td>
-        <td>{{ student.groupId }}</td>
-        <td>
-            <i class="pi pi-ellipsis-v" (click)="menu.toggle($event)"></i>
-            <p-tieredMenu #menu [model]="items" [popup]="true" class="custom-tiered-menu"></p-tieredMenu>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="paginatorleft">
-        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-    </ng-template>
-    <ng-template pTemplate="paginatorright">
-        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
-    </ng-template>
-     </p-table>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Student Id</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Mobile</th>
+                <th>Group</th>
+                <th>Options</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-student>
+            <tr>
+                <td>{{ student.id }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.city }}</td>
+                <td>{{ student.mobile }}</td>
+                <td>{{ student.groupId }}</td>
+                <td>
+                    <i class="pi pi-pencil" style="margin: 4px;" (click)="edit(student)"></i>
+                    <i class="pi pi-trash" (click)="delete(student.id)" style="margin: 4px;"></i>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-table>
+
+    <!-- edit form starts -->
+    <p-dialog header="Long Content" [(visible)]="editStudent" [style]="{ width: '50vw', height: '400px' }">
+        <form [formGroup]="editStudentform" (ngSubmit)="submitEditForm()" action="">
+            <div class="form-section">
+               
+
+                        <div class="grid">
+                            <div class="col-12 md:col-12">
+                                <label for="Name" class="dada">Name:</label>
+                                <div class="mb-3" style="text-align: center;">
+                                    <input pInputText type="text" id="Name" formControlName="Name"
+                                        style="width: 80%;height: 35px;" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid">
+                            <div class="col-12 md:col-12">
+
+                                <label for="City" class="dada">City:</label>
+                                <div class="mb-3" style="text-align: center;">
+                                    <input pInputText type="text" id="City" formControlName="City"
+                                        style="width: 80%;height: 35px;" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid">
+                            <div class="col-12 md:col-12">
+
+                                <label for="Mobile" class="dada">Mobile:</label>
+                                <div class="mb-3" style="text-align: center;">
+                                    <input pInputText type="email" id="Mobile" formControlName="Mobile"
+                                        style="width: 80%;height: 35px;" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid">
+                            <div class="col-12 md:col-12">
+
+                                <label for="GroupId" class="dada">GroupId:</label>
+                                <div class="mb-3" style="text-align: center;">
+                                    <input pInputText type="email" id="GroupId" formControlName="GroupId"
+                                        style="width: 80%; height: 35px;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               
+
+            <div class="grid mt-5">
+                <div class="button mt-5" style="text-align: center; margin-top: 13px;">
+                    <p-button type="submit" [disabled]="editStudentform.invalid" label="Submit"></p-button>
+                </div>
+            </div>
+
+
+        </form>
+
+    </p-dialog>
+    <!-- edit form end here -->
 </div>
-    
-  

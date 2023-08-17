@@ -17,14 +17,21 @@ import { ToastModule } from 'primeng/toast';
 import { ToasterService } from './Services/toaster.service';
 import { MessageService} from 'primeng/api';
 import { TieredMenuModule } from 'primeng/tieredmenu';
+import {SlideMenuModule} from 'primeng/slidemenu';
+import { MenuModule } from 'primeng/menu';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    StudentRegisterComponent
+    StudentRegisterComponent,
+
   ],
   imports: [
+    DialogModule,
+    MenuModule,
+    SlideMenuModule,
     ToastModule,
     CardModule,
     InputTextModule,
