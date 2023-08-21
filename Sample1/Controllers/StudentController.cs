@@ -54,6 +54,17 @@ namespace Sample1.Controllers
             return Ok(student);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteStudent(int id)
+        {
+            try
+            {
+                await studnetRepository.DeleteAsync(id);
+            }
+            catch (Exception ex) { }
+
+            return Ok(id);
+        }
 
     }
 }

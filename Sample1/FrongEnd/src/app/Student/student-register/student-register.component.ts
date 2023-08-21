@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ToasterService } from 'src/app/Services/toaster.service';
 import CommonApiService from 'src/app/Urls/CommonApiServices';
@@ -15,7 +16,7 @@ export class StudentRegisterComponent implements OnInit {
   registrationForm!: FormGroup;
 
   constructor(
-    private messageService: MessageService,
+    private route: Router,
     private fb :FormBuilder,
     private toast:ToasterService,
     private apiService:CommonApiService,
@@ -37,6 +38,9 @@ export class StudentRegisterComponent implements OnInit {
       console.log(res);
       debugger;
       this.toast.showInfo("Student Create Successfully");
+      // this.route.navigate(['/']);
+      this.registrationForm.reset();
     });
+    this.route.navigate(['/']);
   }
 }

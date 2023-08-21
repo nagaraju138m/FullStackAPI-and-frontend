@@ -19,6 +19,10 @@ namespace SampleData
         public DbSet<Group> groups { get; set; }
         public DbSet<Subject> subjects { get; set; }
         public DbSet<GroupSubject> groupsSubject { get; set; }
+        public DbSet<Book> books { get; set; }
+        public DbSet<bookType> bookTypes { get; set; }
+        public DbSet<StudentsBooks> studentsBooks { get; set; }
+        public DbSet<StudentPayments> studentPayments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

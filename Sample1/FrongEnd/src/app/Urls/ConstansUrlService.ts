@@ -4,7 +4,14 @@ import { Injectable } from "@angular/core"
 export namespace ConstansUrlService{
 
     
-    export const createStudents = "/api/Student/PostStudent"
-    export const getStudents = "/api/Student/GetStudents"
-    export const updateStudent = "/api/Student/UpdateStudents"
+    export const createStudents = "/Student/PostStudent"
+    export const getStudents = "/Student/GetStudents"
+    export const updateStudent = "/Student"
+    export const deleteStudent = "/Student"
+    
+    
+    export const getbooks = "/Book/getbooks"
+    export const PostBooks = "/Book/PostBooks"
+
+
 }

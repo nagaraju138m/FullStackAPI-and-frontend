@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SampleData;
 
@@ -11,9 +12,10 @@ using SampleData;
 namespace SampleData.Migrations
 {
     [DbContext(typeof(StudendDbcontext))]
-    partial class StudendDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20230817135212_books classs added")]
+    partial class booksclasssadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +38,7 @@ namespace SampleData.Migrations
                     b.Property<string>("BookName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("bookTypeId")
+                    b.Property<int?>("bookTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("description")
@@ -207,11 +209,11 @@ namespace SampleData.Migrations
 
             modelBuilder.Entity("SampleData.Data.Book", b =>
                 {
-                    b.HasOne("SampleData.Data.bookType", null)
+                    b.HasOne("SampleData.Data.bookType", "BookType")
                         .WithMany("books")
-                        .HasForeignKey("bookTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("bookTypeId");
+
+                    b.Navigation("BookType");
                 });
 
             modelBuilder.Entity("SampleData.Data.GroupSubject", b =>

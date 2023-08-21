@@ -8,10 +8,9 @@ import { Injectable } from "@angular/core";
 
 export default class CommonApiService{
 
-    public apiUrl = 'https://localhost:7083';
+    public apiUrl = 'https://localhost:7083/api';
 
     constructor(
-        private appSettings: UrlServices,
         private http: HttpClient
       ){}
 
@@ -23,6 +22,15 @@ export default class CommonApiService{
       postData(url:string, data:any){
         const path:string = this.apiUrl + url;
         return this.http.post(path, data);
+      }
+
+      updateData(url:string, data:any){
+        const path:string = this.apiUrl + url;
+        return this.http.put(path,data);
+      }
+      deleteData(url:string,id:any){
+        const parth: string = this.apiUrl + url;
+        return this.http.delete(parth);
       }
 
 }

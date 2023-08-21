@@ -36,6 +36,7 @@
                 <th>Mobile</th>
                 <th>Group</th>
                 <th>Options</th>
+                <th></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-student>
@@ -47,8 +48,9 @@
                 <td>{{ student.groupId }}</td>
                 <td>
                     <i class="pi pi-pencil" style="margin: 4px;" (click)="edit(student)"></i>
-                    <i class="pi pi-trash" (click)="delete(student.id)" style="margin: 4px;"></i>
+                    <i class="pi pi-trash" (click)="confirm2()" style="margin: 4px;"></i>
                 </td>
+                <td>Add Books</td>
             </tr>
         </ng-template>
         <ng-template pTemplate="paginatorleft">

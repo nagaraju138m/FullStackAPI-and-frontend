@@ -30,9 +30,16 @@ namespace Repository.Repository
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(int? id)
+        public async Task<string> DeleteAsync(int? id)
         {
-            throw new NotImplementedException();
+            var entity = await context.Set<T>().FindAsync(id);
+            if (entity == null)
+            {
+                return "Student Not found";
+            }
+            context.Set<T>().Remove(entity);
+            await context.SaveChangesAsync();
+            return "Student Deleted";
         }
 
         public Task<bool> Exists(int id)
@@ -42,7 +49,8 @@ namespace Repository.Repository
 
         public async Task<List<T>> GetAllAsync()
         {
-            return await context.Set<T>().ToListAsync();
+            var result = await context.Set<T>().ToListAsync();
+            return result;
         }
 
         public Task<List<TResult>> GetAllAsync<TResult>()
