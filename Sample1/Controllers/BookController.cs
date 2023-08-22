@@ -25,6 +25,13 @@ namespace Sample1.Controllers
             return Ok(books);
         }
 
+        [HttpGet("getallBooks")]
+        public async Task<ActionResult<IEnumerable>> GetAllbooks()
+        {
+            var books = await bookRepository.GetAllbooks();
+            return Ok(books);
+        }
+
         [HttpPost("PostBooks")]
         public async Task<ActionResult<Book>> PostBook(Book book)
         {
