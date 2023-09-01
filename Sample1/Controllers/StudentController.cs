@@ -66,5 +66,24 @@ namespace Sample1.Controllers
             return Ok(id);
         }
 
+        [HttpPost("StudentBooksAdd")]
+        public async Task<ActionResult> AddBookToStudent(StudentsBooks studentsBooks)
+        {
+            if (studentsBooks == null)
+            {
+                return BadRequest(nameof(studentsBooks));
+            }
+            var Sbook = await studnetRepository.AddSbooks(studentsBooks);
+            return Ok(studentsBooks);
+        }
+
+        [HttpGet("getAllStudentBooks")]
+        public async Task<ActionResult<IEnumerable>> GetStudentsBooks()
+        {
+            var studentbooks = await studnetRepository.allSbooks();
+
+            return Ok(studentbooks);
+        }
     }
+
 }

@@ -22,7 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IStudnetRepository, StudnetRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
-
+builder.Services.AddScoped<IStudentBookRepository, StudentBookRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMappers));
 

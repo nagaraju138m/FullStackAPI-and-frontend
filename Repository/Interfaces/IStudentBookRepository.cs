@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Repository.Interfaces
 {
-    public interface IStudnetRepository : IGenericRepository<Student>
+    public interface IStudentBookRepository : IGenericRepository<StudentsBooks>
     {
         Task<StudentsBooks> AddSbooks(StudentsBooks entity);
-        Task<IEnumerable<GetAllStudentBooks>> allSbooks();
     }
-
 }

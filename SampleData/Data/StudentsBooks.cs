@@ -15,7 +15,6 @@ namespace SampleData.Data
         public int studentId { get; set; }
         [ForeignKey("bookId")]
         public int bookId { get; set; }
-        public Book book { get; set; }
         public bool hasBook { get; set; }
     }
 }
