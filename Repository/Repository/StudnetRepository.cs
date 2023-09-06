@@ -22,7 +22,17 @@ namespace Repository.Repository
         }
         public async Task<StudentsBooks> AddSbooks(StudentsBooks entity)
         {
+
             var books = await context.studentsBooks.AddAsync(entity);
+            // Check if the student already has the book
+            var existingBooks = await context.studentsBooks
+                .Where(s => s.studentId == entity.studentId && s.bookId == entity.bookId)
+                .ToListAsync();
+
+            if (existingBooks.Count > 0)
+            {
+                throw new Exception("The student already has the book.");
+            }
             await context.SaveChangesAsync();
 
             return (entity);
@@ -30,22 +40,22 @@ namespace Repository.Repository
 
         public async Task<IEnumerable<GetAllStudentBooks>> allSbooks()
         {
-            var Sbooks = await (from student in context.student
-                                join sbooks in context.studentsBooks on student.Id equals sbooks.studentId
-                                join btype in context.bookTypes on sbooks.bookId equals btype.bookTypeId
-                                join book in context.books on btype.bookTypeId equals book.bookTypeId
-                                where sbooks.bookId == book.bookTypeId
+            var Sbooks = await (from sbooks in context.studentsBooks
+                                join student in context.student on sbooks.studentId equals student.Id
+                                join book in context.books on sbooks.bookId equals book.bookId
+                                join btype in context.bookTypes on book.bookTypeId equals btype.bookTypeId   
                                 select new
                                 {
                                     student.Id,
                                     student.Name,
                                     student.City,
                                     student.Mobile,
+                                    sbooks.bookId,
                                     book.BookName,
                                     book.Active,
-                                    btype.booksType,
                                     book.description,
-                                    btype.bookTypeId
+                                    book.bookTypeId
+
                                 })
                     .Distinct() // Ensures unique rows
                     .GroupBy(s => new { s.Id, s.Name, s.City, s.Mobile })
@@ -59,9 +69,9 @@ namespace Repository.Repository
                         {
                             BookName = s.BookName,
                             Active = s.Active,
-                            BooksType = s.booksType,
                             BookTypeDescripting = s.description,
-                            BtypeId = s.bookTypeId
+                            BtypeId = s.bookTypeId,
+                            BooksType = s.bookId,
                         }).ToList()
                     })
                     .ToListAsync();

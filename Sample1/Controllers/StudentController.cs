@@ -29,7 +29,13 @@ namespace Sample1.Controllers
             var studentDto = mapper.Map<List<GetStudentsDto>>(students);
             return Ok(studentDto);
         }
-        
+
+        [HttpGet("Id")]
+        public async Task<Student> GetStudent(int id)
+        {
+            return await studnetRepository.GetAsync(id);
+        }
+
         [HttpPost("PostStudent")]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {

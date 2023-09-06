@@ -23,6 +23,7 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped<IStudnetRepository, StudnetRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IStudentBookRepository, StudentBookRepository>();
+builder.Services.AddScoped<IStudentPayments, StudentPaymentsRepo>();
 
 builder.Services.AddAutoMapper(typeof(AutoMappers));
 

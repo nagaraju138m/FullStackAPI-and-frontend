@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SampleData;
 
@@ -11,9 +12,10 @@ using SampleData;
 namespace SampleData.Migrations
 {
     [DbContext(typeof(StudendDbcontext))]
-    partial class StudendDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20230906070345_ForeignKey added in student payments")]
+    partial class ForeignKeyaddedinstudentpayments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

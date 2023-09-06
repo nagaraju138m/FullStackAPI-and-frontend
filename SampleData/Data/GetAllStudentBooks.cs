@@ -18,7 +18,7 @@ namespace SampleData.Data
         {
             public string BookName { get; set; }
             public bool Active { get; set; }
-            public string BooksType { get; set; }
+            public int BooksType { get; set; }
             public string BookTypeDescripting { get; set; }
             public int BtypeId { get; set; }
         }
