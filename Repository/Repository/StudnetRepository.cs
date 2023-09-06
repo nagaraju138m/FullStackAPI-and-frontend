@@ -75,23 +75,6 @@ namespace Repository.Repository
                         }).ToList()
                     })
                     .ToListAsync();
-
-            //var Sbooks = await (from student in context.student
-            //                    join sbooks in context.studentsBooks on student.Id equals sbooks.studentId
-            //                    join btype in context.bookTypes on sbooks.bookId equals btype.bookTypeId
-            //                    join book in context.books on btype.bookTypeId equals book.bookTypeId
-            //                    select new GetAllStudentBooks
-            //                    {
-            //                        StudentId = student.Id,
-            //                        StudentName = student.Name,
-            //                        City = student.City,
-            //                        MobileNo = student.Mobile,
-            //                        BookName = book.BookName,
-            //                        Active = book.Active,
-            //                        BooksType = btype.booksType,
-            //                        BookTypeDescripting = book.description
-            //                    }).ToListAsync();
-
             return Sbooks;
 
         }
