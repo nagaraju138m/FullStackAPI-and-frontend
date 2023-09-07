@@ -10,5 +10,6 @@ namespace Repository.Interfaces
     public interface IStudentBookRepository : IGenericRepository<StudentsBooks>
     {
         Task<StudentsBooks> AddSbooks(StudentsBooks entity);
+        Task<List<StudentsBooks>> GetbooksById();
     }
 }

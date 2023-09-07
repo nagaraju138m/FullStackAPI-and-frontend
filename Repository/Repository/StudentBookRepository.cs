@@ -25,5 +25,13 @@ namespace Repository.Repository
 
             return (entity);
         }
+
+        public async Task<List<StudentsBooks>> GetbooksById()
+        {
+
+            throw new NotImplementedException();
+        }
+
+
     }
 }

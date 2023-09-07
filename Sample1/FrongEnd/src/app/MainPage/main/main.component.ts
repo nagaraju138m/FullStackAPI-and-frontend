@@ -15,27 +15,64 @@ import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/a
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent {
-  items!: MenuItem[] ;
-  editStudent:boolean = false;
+  items!: MenuItem[];
+  editStudent: boolean = false;
   editStudentform!: FormGroup;
-  workStudent:any;
+  workStudent: any;
   students: any[] = [];
   first = 0;
+  deletedNum!: number;
+  studentForm!: FormGroup;
 
+  groupNames: { [key: number]: string } = {
+    1: 'MPC',
+    2: 'PIBC',
+    3: 'CEC',
+    4: 'MEC',
+    5: 'MPC',
+    6: 'BIPC'
+  };
   rows = 10;
   constructor(
     private confirmationService: ConfirmationService,
-     private messageService: MessageService,
+    private messageService: MessageService,
     private fb: FormBuilder,
-    private toast:ToasterService,
-    private apiService:CommonApiService, private route:Router) { }
+    private toast: ToasterService,
+    private apiService: CommonApiService, private route: Router) { }
 
   ngOnInit(): void {
+    this.studentForm = this.fb.group({
+      name: [''],
+      id: [''],
+      city: [''],
+      mobile: [''],
+      group: ['']
+      // Add more form controls for other student properties
+    });
+
     this.getStudents();
     this.menuitems();
     this.loadedit();
   }
-  loadedit(){
+  addStuBooks(student: any) {
+    debugger;
+    if (student) {
+      this.studentForm.patchValue({
+        name: student.name,
+        id: student.id,
+        city: student.city,
+        mobile: student.mobile,
+        group: this.groupNames[student.groupId]
+      });
+    }
+  }
+  submitstubooks(){
+    debugger
+    this.studentForm.value;
+  }
+
+
+  loadedit() {
     this.editStudentform = this.fb.group({
       Name: ['', Validators.required],
       City: ['', Validators.required],
@@ -43,144 +80,90 @@ export class MainComponent {
       GroupId: ['', Validators.required]
     });
   }
-  menuitems(){
+  menuitems() {
     this.items = [
       {
-          label: 'Edit',
-          icon: 'pi pi-fw pi-file',
+        label: 'Edit',
+        icon: 'pi pi-fw pi-file',
       },
       {
-          label: 'Delete',
-          icon: 'pi pi-fw pi-pencil',
+        label: 'Delete',
+        icon: 'pi pi-fw pi-pencil',
       }]
   }
   getStudents(): void {
-    debugger;
-    const {getStudents} = ConstansUrlService;
-    this.apiService.getData(getStudents).subscribe((students:any )=> {
+    const { getStudents } = ConstansUrlService;
+    this.apiService.getData(getStudents).subscribe((students: any) => {
       this.students = students;
       console.log(students);
     });
   }
 
-registr(){
-this.route.navigate(['/registerStu']);
-}
-edit(student:any){
-  this.workStudent = student;
-  this.editStudent = true;
-  this.editStudentform.patchValue({
-    Name: student.name,
-    City: student.city,
-    Mobile: student.mobile,
-    GroupId: student.groupId
-  });
-}
-submitEditForm() {
-  if (this.editStudentform.valid) {
-    debugger;
-    const { updateStudent } = ConstansUrlService;
-    const updateUrl = `${updateStudent}/${this.workStudent.id.toString()}`;
-
-    const requestData = {
-      id: this.workStudent.id,
-      name: this.editStudentform.get('Name')!.value,
-      city: this.editStudentform.get('City')!.value,
-      mobile: this.editStudentform.get('Mobile')!.value,
-      groupId: this.editStudentform.get('GroupId')!.value
-    };
-
-    this.apiService.updateData(updateUrl, requestData)
-      .subscribe((response) => {
-        const editedStudentData = requestData;
-        this.toast.showWarn("Deleted Success fully"+response);
-      });
+  registr() {
+    this.route.navigate(['/registerStu']);
   }
-}
+  edit(student: any) {
+    this.workStudent = student;
+    this.editStudent = true;
+    this.editStudentform.patchValue({
+      Name: student.name,
+      City: student.city,
+      Mobile: student.mobile,
+      GroupId: student.groupId
+    });
+  }
+  submitEditForm() {
+    if (this.editStudentform.valid) {
+      const { updateStudent } = ConstansUrlService;
+      const updateUrl = `${updateStudent}/${this.workStudent.id.toString()}`;
 
-// delete(studentId: number) {
-//   debugger;
-//  if(studentId != null){
-//   const {deleteStudent} = ConstansUrlService;
-//   const updateUrl= `${deleteStudent}/${studentId.toString()}`
-//   this.apiService.deleteData(updateUrl,studentId)
-//   .subscribe((res)=>{
-//     if(res){
-//       console.log(res);
-//       this.getStudents();
-//     }
-//   });
-//  }
-// }
+      const requestData = {
+        id: this.workStudent.id,
+        name: this.editStudentform.get('Name')!.value,
+        city: this.editStudentform.get('City')!.value,
+        mobile: this.editStudentform.get('Mobile')!.value,
+        groupId: this.editStudentform.get('GroupId')!.value
+      };
 
-next() {
-  this.first = this.first + this.rows;
-}
-prev() {
-  this.first = this.first - this.rows;
-}
-reset() {
-  this.first = 0;
-}
-isLastPage(): boolean {
-  return this.students ? this.first === this.students.length - this.rows : true;
-}
-isFirstPage(): boolean {
-  return this.students ? this.first === 0 : true;
-}
+      this.apiService.updateData(updateUrl, requestData)
+        .subscribe((response) => {
+          const editedStudentData = requestData;
+          this.toast.showWarn("Deleted Success fully" + response);
+        });
+    }
+  }
 
-delete(studentId: number) {
-  debugger;
-  this.confirmationService.confirm({
-      message: 'Do you want to delete this record?',
-      header: 'Delete Confirmation',
-      icon: 'pi pi-info-circle',
-      accept: () => {
-        // if(studentId != null){
-        //     const {deleteStudent} = ConstansUrlService;
-        //     const updateUrl= `${deleteStudent}/${studentId.toString()}`
-        //     this.apiService.deleteData(updateUrl,studentId)
-        //     .subscribe((res)=>{
-        //       if(res){
-        //         console.log(res);
-        //         this.getStudents();
-        //       }
-        //     });
-        //    }
-           this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
-      },
-      reject: (type:any) => {
-          switch (type) { // Corrected syntax here
-              case ConfirmEventType.REJECT:
-                  this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
-                  break;
-              case ConfirmEventType.CANCEL:
-                  this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
-                  break;
+  deleteNumner(id: number) {
+    this.deletedNum = id;
+  }
+
+  delete() {
+    if (this.deletedNum != null) {
+      const { deleteStudent } = ConstansUrlService;
+      const updateUrl = `${deleteStudent}/${this.deletedNum.toString()}`
+      this.apiService.deleteData(updateUrl, this.deletedNum)
+        .subscribe((res) => {
+          if (res) {
+            console.log(res);
+            this.getStudents();
           }
-      }
-  });
-}
+        });
+    }
+  }
 
-confirm2() {
-  debugger;
-  this.confirmationService.confirm({
-      message: 'Do you want to delete this record?',
-      header: 'Delete Confirmation',
-      icon: 'pi pi-info-circle',
-      accept: () => {
-          this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
-      },
-      reject: (type:any) => {
-          switch (type) { // Corrected syntax here
-              case ConfirmEventType.REJECT:
-                  this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
-                  break;
-              case ConfirmEventType.CANCEL:
-                  this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
-                  break;
-          }
-      }
-  });
-}
+  next() {
+    this.first = this.first + this.rows;
+  }
+  prev() {
+    this.first = this.first - this.rows;
+  }
+  reset() {
+    this.first = 0;
+  }
+  isLastPage(): boolean {
+    return this.students ? this.first === this.students.length - this.rows : true;
+  }
+  isFirstPage(): boolean {
+    return this.students ? this.first === 0 : true;
+  }
 }
