@@ -10,10 +10,9 @@ export namespace ConstansUrlService{
     export const deleteStudent = "/Student"
 
     // books
-    export const getBooksById = /Book/getBooksById
+    export const getBooksById = "/Book/getBooksById"
     export const getbooks = "/Book/getbooks"
     export const PostBooks = "/Book/PostBooks"
-
 
 
 }

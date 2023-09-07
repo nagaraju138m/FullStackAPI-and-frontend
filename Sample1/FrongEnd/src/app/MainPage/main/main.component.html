@@ -1,5 +1,4 @@
 <div class="overlay" *ngIf="editStudent"></div>
-
 <div>
     <nav class="">
         <div class="navbar-container container">
@@ -17,17 +16,14 @@
             <h1 class="logo">Navbar</h1>
         </div>
     </nav>
-
 </div>
-
-
-
 <div>
     <p-table [value]="students" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
         [tableStyle]="{ 'min-width': '50rem' }"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [rowsPerPageOptions]="[5,10, 25, 50]" [style]="{'margin-top':'5%'}">
 
+        <!-- students table data -->
         <ng-template pTemplate="header">
             <tr>
                 <th>Student Id</th>
@@ -45,12 +41,14 @@
                 <td>{{ student.name }}</td>
                 <td>{{ student.city }}</td>
                 <td>{{ student.mobile }}</td>
-                <td>{{ student.groupId }}</td>
+                <td>{{ groupNames[student.groupId] }}</td>
                 <td>
                     <i class="pi pi-pencil" style="margin: 4px;" (click)="edit(student)"></i>
-                    <i class="pi pi-trash" (click)="confirm2()" style="margin: 4px;"></i>
+                    <i class="fa-solid fa-trash" (click)="deleteNumner(student.id)" style="margin: 4px; color: red;"
+                        data-bs-toggle="modal" data-bs-target="#exampleModalCenter"></i>
+                    <!-- <i class="pi pi-trash" (click)="confirm2()" ></i> -->
                 </td>
-                <td>Add Books</td>
+                <td><button data-bs-toggle="modal" (click)="addStuBooks(student)" data-bs-target="#booksadd" type="button" class="btn btn-primary">Add Books</button></td>
             </tr>
         </ng-template>
         <ng-template pTemplate="paginatorleft">
@@ -59,56 +57,53 @@
         <ng-template pTemplate="paginatorright">
             <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
         </ng-template>
+        <!-- student data ends -->
     </p-table>
 
     <!-- edit form starts -->
     <p-dialog header="Long Content" [(visible)]="editStudent" [style]="{ width: '50vw', height: '400px' }">
         <form [formGroup]="editStudentform" (ngSubmit)="submitEditForm()" action="">
             <div class="form-section">
-               
-
-                        <div class="grid">
-                            <div class="col-12 md:col-12">
-                                <label for="Name" class="dada">Name:</label>
-                                <div class="mb-3" style="text-align: center;">
-                                    <input pInputText type="text" id="Name" formControlName="Name"
-                                        style="width: 80%;height: 35px;" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid">
-                            <div class="col-12 md:col-12">
-
-                                <label for="City" class="dada">City:</label>
-                                <div class="mb-3" style="text-align: center;">
-                                    <input pInputText type="text" id="City" formControlName="City"
-                                        style="width: 80%;height: 35px;" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid">
-                            <div class="col-12 md:col-12">
-
-                                <label for="Mobile" class="dada">Mobile:</label>
-                                <div class="mb-3" style="text-align: center;">
-                                    <input pInputText type="email" id="Mobile" formControlName="Mobile"
-                                        style="width: 80%;height: 35px;" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid">
-                            <div class="col-12 md:col-12">
-
-                                <label for="GroupId" class="dada">GroupId:</label>
-                                <div class="mb-3" style="text-align: center;">
-                                    <input pInputText type="email" id="GroupId" formControlName="GroupId"
-                                        style="width: 80%; height: 35px;" />
-                                </div>
-                            </div>
+                <div class="grid">
+                    <div class="col-12 md:col-12">
+                        <label for="Name" class="dada">Name:</label>
+                        <div class="mb-3" style="text-align: center;">
+                            <input pInputText type="text" id="Name" formControlName="Name"
+                                style="width: 80%;height: 35px;" />
                         </div>
                     </div>
-               
+                </div>
+                <div class="grid">
+                    <div class="col-12 md:col-12">
 
+                        <label for="City" class="dada">City:</label>
+                        <div class="mb-3" style="text-align: center;">
+                            <input pInputText type="text" id="City" formControlName="City"
+                                style="width: 80%;height: 35px;" />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-12 md:col-12">
+
+                        <label for="Mobile" class="dada">Mobile:</label>
+                        <div class="mb-3" style="text-align: center;">
+                            <input pInputText type="email" id="Mobile" formControlName="Mobile"
+                                style="width: 80%;height: 35px;" />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-12 md:col-12">
+
+                        <label for="GroupId" class="dada">GroupId:</label>
+                        <div class="mb-3" style="text-align: center;">
+                            <input pInputText type="email" id="GroupId" formControlName="GroupId"
+                                style="width: 80%; height: 35px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="grid mt-5">
                 <div class="button mt-5" style="text-align: center; margin-top: 13px;">
                     <p-button type="submit" [disabled]="editStudentform.invalid" label="Submit"></p-button>
@@ -120,4 +115,103 @@
 
     </p-dialog>
     <!-- edit form end here -->
+
+    <!-- Modal for delete -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="align-items: center;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                        <i class="fa-solid fa-trash" style="color: red; font-size: 40px;"></i>
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    Are you Sure you Want to Delete ?!?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="delete()" data-bs-dismiss="modal" class="btn btn-primary">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal for delete ends here-->
+
+    <div class="modal fade" id="booksadd" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content" style="align-items: center;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                        <h2>Add Books To Student</h2>
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="studentForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-default">StudentName</span>
+                                <!-- <input formControlName="name" disabled type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"> -->
+                                <input formControlName="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-default">StudentId</span>
+                                <input formControlName="id" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-default">StudentCity</span>
+                                <input formControlName="city"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-default">StudentMobile</span>
+                                <input formControlName="mobile"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-default">StudentGroup</span>
+                                <input formControlName="group"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-default">StudentId</span>
+                                <input disabled type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-default">StudentName</span>
+                                <input disabled type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                              </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="submitstubooks()" >Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
