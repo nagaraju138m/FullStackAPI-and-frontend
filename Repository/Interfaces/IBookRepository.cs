@@ -10,5 +10,6 @@ namespace Repository.Interfaces
     public interface IBookRepository : IGenericRepository<Book>
     {
         Task<IEnumerable<GetAllBookDetails>> GetAllbooks();
+        Task<List<Book>> GetbooksById(int id);
     }
 }

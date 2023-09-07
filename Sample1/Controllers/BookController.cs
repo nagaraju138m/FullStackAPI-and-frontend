@@ -25,6 +25,13 @@ namespace Sample1.Controllers
             return Ok(books);
         }
 
+        [HttpGet("getBooksById")]
+        public async Task<ActionResult<List<Book>>> getBooksById(int id)
+        {
+            var books = await bookRepository.GetbooksById(id);
+            return Ok(books);
+        }
+
         [HttpGet("getallBooks")]
         public async Task<ActionResult<IEnumerable>> GetAllbooks()
         {

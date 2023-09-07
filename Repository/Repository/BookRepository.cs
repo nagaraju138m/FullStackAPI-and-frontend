@@ -41,5 +41,11 @@ namespace Repository.Repository
             }
             return (allbookds);
         }
+
+        public async Task<List<Book>> GetbooksById(int id)
+        {
+            var books = await context.books.Where(b => b.bookTypeId == id).ToListAsync() ;
+            return books;
+        }
     }
 }
