@@ -23,6 +23,7 @@ export class MainComponent {
   first = 0;
   deletedNum!: number;
   studentForm!: FormGroup;
+  booksData: any[] = [];
 
   groupNames: { [key: number]: string } = {
     1: 'MPC',
@@ -55,7 +56,16 @@ export class MainComponent {
     this.loadedit();
   }
   addStuBooks(student: any) {
+    const { getBooksById } = ConstansUrlService;
     debugger;
+    const updateUrl = `${getBooksById}${student.groupId.toString()}`
+      this.apiService.getData(updateUrl)
+        .subscribe((res:any) => {
+          if (res) {
+            console.log(res);
+            this.booksData = res;
+          }
+        });
     if (student) {
       this.studentForm.patchValue({
         name: student.name,

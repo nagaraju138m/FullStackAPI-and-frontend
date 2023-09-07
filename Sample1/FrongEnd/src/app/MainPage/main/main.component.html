@@ -61,7 +61,7 @@
     </p-table>
 
     <!-- edit form starts -->
-    <p-dialog header="Long Content" [(visible)]="editStudent" [style]="{ width: '50vw', height: '400px' }">
+    <p-dialog header="Edit Student" [(visible)]="editStudent" [style]="{ width: '50vw', height: '508px' }">
         <form [formGroup]="editStudentform" (ngSubmit)="submitEditForm()" action="">
             <div class="form-section">
                 <div class="grid">
@@ -138,6 +138,7 @@
     </div>
     <!-- Modal for delete ends here-->
 
+    <!-- add books to students -->
     <div class="modal fade" id="booksadd" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -182,29 +183,60 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="inputGroup-sizing-default">StudentGroup</span>
                                 <input formControlName="group"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                               </div>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="inputGroup-sizing-default">StudentId</span>
                                 <input disabled type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                               </div>
-                        </div>
+                        </div> -->
                     </div>
+
+                   
+                    </form>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-default">StudentName</span>
-                                <input disabled type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                              </div>
+                            <div>
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>Select</th>
+                                        <!-- <th>Book ID</th> -->
+                                        <th>Book Name</th>
+                                        <!-- <th>Description</th> -->
+                                        <!-- <th>Price</th> -->
+                                        <th>Quantity</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let book of booksData">
+                                        <td>
+                                          <input type="checkbox">
+                                          <!-- <input type="checkbox" [checked]="selectedBooks.includes(book.bookId)" (change)="toggleSelection(book.bookId)"> -->
+                                        </td>
+                                        <!-- <td>{{ book.bookId }}</td> -->
+                                        <td>{{ book.bookName }}</td>
+                                        <!-- <td>{{ book.description }}</td> -->
+                                        <!-- <td>{{ book.price }}</td> -->
+                                        <td>{{ book.quantity }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            
                         </div>
                     </div>
-                    </form>
+                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" (click)="submitstubooks()" >Save changes</button>
@@ -213,5 +245,6 @@
             </div>
         </div>
     </div>
+    <!-- add books to students end here -->
 
 </div>
