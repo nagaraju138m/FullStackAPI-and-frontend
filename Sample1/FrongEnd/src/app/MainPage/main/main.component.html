@@ -1,22 +1,5 @@
 <div class="overlay" *ngIf="editStudent"></div>
-<div>
-    <nav class="">
-        <div class="navbar-container container">
-            <input type="checkbox" name="" id="">
-            <div class="hamburger-lines">
-                <span class="line line1"></span>
-                <span class="line line2"></span>
-                <span class="line line3"></span>
-            </div>
-            <ul class="menu-items">
-                <li>Home</li>
-                <li>About</li>
-                <li><a (click)="registr()">Register</a></li>
-            </ul>
-            <h1 class="logo">Navbar</h1>
-        </div>
-    </nav>
-</div>
+
 <div>
     <p-table [value]="students" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
         [tableStyle]="{ 'min-width': '50rem' }"
@@ -32,6 +15,7 @@
                 <th>Mobile</th>
                 <th>Group</th>
                 <th>Options</th>
+                <!-- <th></th> -->
                 <th></th>
             </tr>
         </ng-template>
@@ -46,9 +30,22 @@
                     <i class="pi pi-pencil" style="margin: 4px;" (click)="edit(student)"></i>
                     <i class="fa-solid fa-trash" (click)="deleteNumner(student.id)" style="margin: 4px; color: red;"
                         data-bs-toggle="modal" data-bs-target="#exampleModalCenter"></i>
+                    <i class="fa-solid fa-book" data-bs-toggle="modal" (click)="addStuBooks(student)"
+                        data-bs-target="#booksadd"></i>
                     <!-- <i class="pi pi-trash" (click)="confirm2()" ></i> -->
                 </td>
-                <td><button data-bs-toggle="modal" (click)="addStuBooks(student)" data-bs-target="#booksadd" type="button" class="btn btn-primary">Add Books</button></td>
+                <!-- <td><button data-bs-toggle="modal" (click)="addStuBooks(student)" data-bs-target="#booksadd" type="button" class="btn btn-primary">Add Books</button></td> -->
+                <td>
+                    <div class="dropdown">
+                        <i class="fa-solid fa-ellipsis-vertical" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"></i>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <!-- <button class="dropdown-item" (click)="StudentPayment()" >Make Payment</button> -->
+                            <button class="dropdown-item" (click)="PaymentScreen(student)">Make Payment Option 2</button>
+                        </div>
+                    </div>
+
+                </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="paginatorleft">
@@ -130,7 +127,8 @@
                     Are you Sure you Want to Delete ?!?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" (click)="delete()" data-bs-dismiss="modal" class="btn btn-primary">Confirm</button>
+                    <button type="button" (click)="delete()" data-bs-dismiss="modal"
+                        class="btn btn-primary">Confirm</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
@@ -139,8 +137,8 @@
     <!-- Modal for delete ends here-->
 
     <!-- add books to students -->
-    <div class="modal fade" id="booksadd" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="booksadd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content" style="align-items: center;">
                 <div class="modal-header">
@@ -150,54 +148,59 @@
                 </div>
                 <div class="modal-body">
                     <form [formGroup]="studentForm">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-default">StudentName</span>
-                                <!-- <input formControlName="name" disabled type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"> -->
-                                <input formControlName="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">StudentName</span>
+                                    <!-- <input formControlName="name" disabled type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"> -->
+                                    <input formControlName="name" type="text" class="form-control"
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 
-                              </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">StudentId</span>
+                                    <input formControlName="id" type="text" class="form-control"
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-default">StudentId</span>
-                                <input formControlName="id" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                              </div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-default">StudentCity</span>
-                                <input formControlName="city"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                              </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">StudentCity</span>
+                                    <input formControlName="city" type="text" class="form-control"
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">StudentMobile</span>
+                                    <input formControlName="mobile" type="text" class="form-control"
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-default">StudentMobile</span>
-                                <input formControlName="mobile"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                              </div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-default">StudentGroup</span>
-                                <input formControlName="group"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                              </div>
-                        </div>
-                        <!-- <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">StudentGroup</span>
+                                    <input formControlName="group" type="text" class="form-control"
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-6">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="inputGroup-sizing-default">StudentId</span>
                                 <input disabled type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                               </div>
                         </div> -->
-                    </div>
+                        </div>
 
-                   
+
                     </form>
 
                     <div class="row">
@@ -205,42 +208,38 @@
                             <div>
                                 <table class="table">
                                     <thead>
-                                      <tr>
-                                        <th>Select</th>
-                                        <!-- <th>Book ID</th> -->
-                                        <th>Book Name</th>
-                                        <!-- <th>Description</th> -->
-                                        <!-- <th>Price</th> -->
-                                        <th>Quantity</th>
-                                      </tr>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>Book Name</th>
+                                            <th>Quantity</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                      <tr *ngFor="let book of booksData">
-                                        <td>
-                                          <input type="checkbox">
-                                          <!-- <input type="checkbox" [checked]="selectedBooks.includes(book.bookId)" (change)="toggleSelection(book.bookId)"> -->
-                                        </td>
-                                        <!-- <td>{{ book.bookId }}</td> -->
-                                        <td>{{ book.bookName }}</td>
-                                        <!-- <td>{{ book.description }}</td> -->
-                                        <!-- <td>{{ book.price }}</td> -->
-                                        <td>{{ book.quantity }}</td>
-                                      </tr>
+                                        <tr *ngFor="let book of booksData">
+                                            <td>
+                                                <!-- <input type="checkbox" (change)="toggleSelection(book)"> -->
+                                                <input type="checkbox" [checked]="isBookSelected(book)" (change)="toggleSelection(book)">
+                                            </td>
+                                            <td>{{ book.bookName }}</td>
+                                            <td>{{ book.quantity }}</td>
+                                        </tr>
                                     </tbody>
-                                  </table>
-                                  
+                                </table>
+
                             </div>
                         </div>
                         <div class="col-md-6">
-                            
+                            <ul>
+                                <li *ngFor="let book of alreadyBooks">{{book.bookId}}</li>
+                            </ul>
                         </div>
                     </div>
-                    
+
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" (click)="submitstubooks()" >Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitstubooks()">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

@@ -11,5 +11,9 @@ namespace Repository.Interfaces
     {
         Task<StudentsBooks> AddSbooks(StudentsBooks entity);
         Task<List<StudentsBooks>> GetbooksById();
+        Task<List<StudentsBooks>> GetBooksByStudentId(int id);
+
+        void addStuBooks(List<StudentsBooks> items);
+
     }
 }

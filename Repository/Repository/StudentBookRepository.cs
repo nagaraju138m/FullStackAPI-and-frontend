@@ -1,4 +1,5 @@
-﻿using Repository.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Interfaces;
 using SampleData;
 using SampleData.Data;
 using System;
@@ -11,19 +12,25 @@ namespace Repository.Repository
 {
     public class StudentBookRepository : GenericRepository<StudentsBooks>, IStudentBookRepository
     {
-        private readonly StudendDbcontext context;
+        private readonly StudendDbcontext _context;
 
-        public StudentBookRepository(StudendDbcontext context) : base(context)
+        public StudentBookRepository(StudendDbcontext contexts) : base(contexts)
         {
-            this.context = context;
+            this._context = contexts;
         }
 
         public async Task<StudentsBooks> AddSbooks(StudentsBooks entity)
         {
-            var books = await context.studentsBooks.AddAsync(entity);
-            await context.SaveChangesAsync();
+            var books = await _context.studentsBooks.AddAsync(entity);
+            await _context.SaveChangesAsync();
 
             return (entity);
+        }
+        public async Task<List<StudentsBooks>> GetBooksByStudentId(int studentId)
+        {
+            var books = await _context.studentsBooks.Where(sb => sb.studentId == studentId).ToListAsync();
+
+            return books;
         }
 
         public async Task<List<StudentsBooks>> GetbooksById()
@@ -31,7 +38,13 @@ namespace Repository.Repository
 
             throw new NotImplementedException();
         }
-
-
+        public void addStuBooks(List<StudentsBooks> studentsBooks)
+        {
+            foreach (var book in studentsBooks)
+            {
+                 this._context.studentsBooks.Add(book);
+                 _context.SaveChangesAsync();
+            }
+        }
     }
 }

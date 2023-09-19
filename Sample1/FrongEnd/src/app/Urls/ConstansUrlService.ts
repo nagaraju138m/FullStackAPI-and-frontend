@@ -15,4 +15,13 @@ export namespace ConstansUrlService{
     export const PostBooks = "/Book/PostBooks"
 
 
+
+    // studentbooks
+    export const getByStuId = "/StudentBooks/getByStuId?sId="
+    export const StudentBooksAdd = "/StudentBooks/StudentBooksAdd"
+    
+    // student Payments
+    export const GetStuPaymentbyid = "/StudentPayments/GetStuPayment?id="
+    export const PostStuPayment = "/StudentPayments/PostStuPayment"
+
 }

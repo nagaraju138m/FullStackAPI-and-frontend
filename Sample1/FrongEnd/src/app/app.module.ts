@@ -9,7 +9,7 @@ import { TableModule } from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http'
 import { ButtonModule } from 'primeng/button';
 import { StudentRegisterComponent } from './Student/student-register/student-register.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import CommonApiService from './Urls/CommonApiServices';
@@ -20,6 +20,9 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
 import {SlideMenuModule} from 'primeng/slidemenu';
 import { MenuModule } from 'primeng/menu';
 import { DialogModule } from 'primeng/dialog';
+import { NavbarComponent } from './navbar/navbar.component';
+import { DataShare } from './Services/SharedDataObS.service';
+import { StudentPaymentsComponent } from './Student/student-payments/student-payments.component';
 // import { PrimeNGModule } from 'primeng'; 
 
 @NgModule({
@@ -27,10 +30,13 @@ import { DialogModule } from 'primeng/dialog';
     AppComponent,
     MainComponent,
     StudentRegisterComponent,
+    NavbarComponent,
+    StudentPaymentsComponent
 
   ],
   imports: [
-    
+    FormsModule,
+    ReactiveFormsModule,
     DialogModule,
     MenuModule,
     SlideMenuModule,
@@ -51,7 +57,8 @@ import { DialogModule } from 'primeng/dialog';
     // useClass: CommonApiService
     ToasterService,
     MessageService,
-    ConfirmationService
+    ConfirmationService,
+    DataShare,
   ],
   bootstrap: [AppComponent]
 })

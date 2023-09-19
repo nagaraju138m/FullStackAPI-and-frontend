@@ -8,6 +8,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToasterService } from 'src/app/Services/toaster.service';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
+import { DataShare } from 'src/app/Services/SharedDataObS.service';
 
 @Component({
   selector: 'app-main',
@@ -24,6 +25,13 @@ export class MainComponent {
   deletedNum!: number;
   studentForm!: FormGroup;
   booksData: any[] = [];
+  selectedStudent:any;
+  selectedBooks: any[] = [];
+  studentBooks: any[] = [];
+  alreadyBooks:any[]=[];
+
+  StuRegister : boolean = false;
+  Main:boolean=true;
 
   groupNames: { [key: number]: string } = {
     1: 'MPC',
@@ -35,6 +43,7 @@ export class MainComponent {
   };
   rows = 10;
   constructor(
+    private dataShare: DataShare,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private fb: FormBuilder,
@@ -56,14 +65,22 @@ export class MainComponent {
     this.loadedit();
   }
   addStuBooks(student: any) {
-    const { getBooksById } = ConstansUrlService;
+    this.selectedStudent = student;
+    const { getBooksById, getByStuId } = ConstansUrlService;
     debugger;
     const updateUrl = `${getBooksById}${student.groupId.toString()}`
-      this.apiService.getData(updateUrl)
+    const stubooksurl = `${getByStuId}${student.id.toString()}`
+    this.apiService.getData(stubooksurl)
         .subscribe((res:any) => {
           if (res) {
-            console.log(res);
-            this.booksData = res;
+            this.selectedBooks = res;
+            this.apiService.getData(updateUrl)
+            .subscribe((res:any) => {
+              if (res) {
+                console.log(res);
+                this.booksData = res;
+              }
+            });
           }
         });
     if (student) {
@@ -76,11 +93,40 @@ export class MainComponent {
       });
     }
   }
+  isBookSelected(book: any): boolean {
+    if (typeof book === 'object' && 'bookId' in book) {
+      return this.selectedBooks.some(selectedBook => selectedBook.bookId === book.bookId);
+    }
+    return false;
+  } 
   submitstubooks(){
     debugger
-    this.studentForm.value;
+    const { StudentBooksAdd } = ConstansUrlService;
+    this.apiService.postData(StudentBooksAdd,this.studentBooks).subscribe(res=>{
+      this.studentBooks = [];
+      this.booksData = [];
+    })
   }
+  toggleSelection(book:any): void {
+    debugger;
+    book.selected = !book.selected;
 
+    if (book.selected) {
+      // If the book is selected, create a student book object and add it to the array
+      const studentBook = {
+        studentId: this.selectedStudent.id, // Replace with the actual studentId
+        bookId: book.bookId,
+        hasBook : true
+      };
+      this.studentBooks.push(studentBook);
+    } else {
+      // If the book is deselected, find and remove the corresponding student book object from the array
+      const index = this.studentBooks.findIndex(studentBook => studentBook.bookId === book.bookId);
+      if (index !== -1) {
+        this.studentBooks.splice(index, 1);
+      }
+    }
+  }
 
   loadedit() {
     this.editStudentform = this.fb.group({
@@ -108,10 +154,6 @@ export class MainComponent {
       console.log(students);
     });
   }
-
-  registr() {
-    this.route.navigate(['/registerStu']);
-  }
   edit(student: any) {
     this.workStudent = student;
     this.editStudent = true;
@@ -126,7 +168,6 @@ export class MainComponent {
     if (this.editStudentform.valid) {
       const { updateStudent } = ConstansUrlService;
       const updateUrl = `${updateStudent}/${this.workStudent.id.toString()}`;
-
       const requestData = {
         id: this.workStudent.id,
         name: this.editStudentform.get('Name')!.value,
@@ -139,10 +180,15 @@ export class MainComponent {
         .subscribe((response) => {
           const editedStudentData = requestData;
           this.toast.showWarn("Deleted Success fully" + response);
+          this.editStudent = false;
+          this.getStudents();
         });
     }
   }
-
+  PaymentScreen(student:any){
+    this.dataShare.updateStudentData(student);
+    this.route.navigate(['/StuPayments']);
+  }
   deleteNumner(id: number) {
     this.deletedNum = id;
   }

@@ -1,3 +1,10 @@
+C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.csproj.AssemblyReference.cache
+C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.GeneratedMSBuildEditorConfig.editorconfig
+C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.AssemblyInfoInputs.cache
+C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.AssemblyInfo.cs
+C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.csproj.CoreCompileInputs.cache
+C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.MvcApplicationPartsAssemblyInfo.cs
+C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.MvcApplicationPartsAssemblyInfo.cache
 C:\MNR\Working\July\6th\Sample1\Sample1\bin\Debug\net6.0\appsettings.Development.json
 C:\MNR\Working\July\6th\Sample1\Sample1\bin\Debug\net6.0\appsettings.json
 C:\MNR\Working\July\6th\Sample1\Sample1\bin\Debug\net6.0\FrongEnd\angular.json
@@ -54,13 +61,6 @@ C:\MNR\Working\July\6th\Sample1\Sample1\bin\Debug\net6.0\Repository.dll
 C:\MNR\Working\July\6th\Sample1\Sample1\bin\Debug\net6.0\SampleData.dll
 C:\MNR\Working\July\6th\Sample1\Sample1\bin\Debug\net6.0\Repository.pdb
 C:\MNR\Working\July\6th\Sample1\Sample1\bin\Debug\net6.0\SampleData.pdb
-C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.csproj.AssemblyReference.cache
-C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.GeneratedMSBuildEditorConfig.editorconfig
-C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.AssemblyInfoInputs.cache
-C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.AssemblyInfo.cs
-C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.csproj.CoreCompileInputs.cache
-C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.MvcApplicationPartsAssemblyInfo.cs
-C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\Sample1.MvcApplicationPartsAssemblyInfo.cache
 C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\staticwebassets\msbuild.Sample1.Microsoft.AspNetCore.StaticWebAssets.props
 C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\staticwebassets\msbuild.build.Sample1.props
 C:\MNR\Working\July\6th\Sample1\Sample1\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Sample1.props
