@@ -90,7 +90,7 @@
             <label for="">ReceivedBy</label>
             <input class="form-control" type="text" placeholder="Enter" [(ngModel)]="amtRecvBy" >
 
-          <button type="button" (click)="submitPayment()" class="btn btn-primary">MakePayment</button>
+          <button type="button" (click)="submitPayment()" data-bs-dismiss="modal" class="btn btn-primary">MakePayment</button>
           <button type="button" data-bs-dismiss="modal" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
@@ -98,7 +98,7 @@
   </div>
 
 
-
+  <p-toast></p-toast>
 
 
 

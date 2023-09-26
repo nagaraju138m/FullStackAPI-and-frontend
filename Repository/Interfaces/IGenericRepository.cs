@@ -9,11 +9,10 @@ namespace Repository.Interfaces
     public interface IGenericRepository<T> where T : class
     {
         Task<T> GetAsync(int? id);
-        Task<TResult> GetAsync<TResult>(int? id);
         Task<List<T>> GetAllAsync();
-        Task<List<TResult>> GetAllAsync<TResult>();
+
         Task<T> AddAsynch(T entity);
-        Task<TResult> AddAsynch<Tsource, TResult>(Tsource tsource);
+
         Task<string> DeleteAsync(int? id);
         Task UpdateAsync(int? id,T entity);
         Task<bool> Exists(int id);

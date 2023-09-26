@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToasterService } from 'src/app/Services/toaster.service';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { DataShare } from 'src/app/Services/SharedDataObS.service';
-
+declare var bootstrap: any; 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -50,7 +50,20 @@ export class MainComponent {
     private toast: ToasterService,
     private apiService: CommonApiService, private route: Router) { }
 
+    hello(){
+      debugger;
+    }
   ngOnInit(): void {
+
+
+    const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl);
+    });
+
+
+
+
     this.studentForm = this.fb.group({
       name: [''],
       id: [''],

@@ -25,10 +25,7 @@ namespace Repository.Repository
             return entity;
         }
 
-        public Task<TResult> AddAsynch<Tsource, TResult>(Tsource tsource)
-        {
-            throw new NotImplementedException();
-        }
+ 
 
         public async Task<string> DeleteAsync(int? id)
         {
@@ -53,10 +50,6 @@ namespace Repository.Repository
             return result;
         }
 
-        public Task<List<TResult>> GetAllAsync<TResult>()
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<T> GetAsync(int? id)
         {
@@ -68,10 +61,7 @@ namespace Repository.Repository
             return result;
         }
 
-        public Task<TResult> GetAsync<TResult>(int? id)
-        {
-            throw new NotImplementedException();
-        }
+   
 
         public async Task UpdateAsync(int? id, T entity)
         {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataShare } from 'src/app/Services/SharedDataObS.service';
 import { DataService } from 'src/app/Services/data.service';
+import { ToasterService } from 'src/app/Services/toaster.service';
 import CommonApiService from 'src/app/Urls/CommonApiServices';
 import { ConstansUrlService } from 'src/app/Urls/ConstansUrlService';
 
@@ -37,6 +38,7 @@ export class StudentPaymentsComponent {
     private fb: FormBuilder,
     private studentDataService: DataShare,
     private apiService: CommonApiService,
+    private toast:ToasterService,
   ) { }
   ngOnInit() {
     this.myForm = this.fb.group({
@@ -111,18 +113,22 @@ export class StudentPaymentsComponent {
   }
   submitPayment() {
     debugger;
+    const currentDate = new Date();
+    const isoPadiDate = currentDate.toISOString();
     const paymentDetails = {
       studentId: this.student.id,
       TotalAmount: this.totalAmount,
       PaidAmount: this.myForm.get('paidAmount')?.value,
       amountReceivedBy: this.amtRecvBy,
-      PadiDate: Date.now
+      PadiDate: isoPadiDate
     }
 
     const { PostStuPayment } = ConstansUrlService;
     const updateUrl = `${PostStuPayment}`;
     this.apiService.postData(updateUrl, paymentDetails).subscribe(res => {
       console.log(res);
+      this.toast.showInfo(this.student.name + " Payment Made Successfylly");
+      this.getStudentData();
     })
   }
 }
